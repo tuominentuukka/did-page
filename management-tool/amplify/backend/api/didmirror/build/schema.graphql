@@ -1,0 +1,470 @@
+
+type Subjects @aws_iam @aws_api_key {
+  id: ID!
+  subject_name: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+type Universities @aws_iam @aws_api_key {
+  id: ID!
+  university_name: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+type Genders @aws_iam @aws_api_key {
+  id: ID!
+  gender: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+type Registered @aws_iam @aws_api_key {
+  id: ID!
+  first_name: String
+  last_name: String
+  gender: Int
+  email: AWSEmail
+  phone: String
+  university: Int
+  subject: Int
+  participated_before: Boolean
+  group: Int
+  participatingNow: Boolean
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelSubjectsConnection @aws_api_key @aws_iam {
+  items: [Subjects]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelSubjectsFilterInput {
+  id: ModelIDInput
+  subject_name: ModelStringInput
+  and: [ModelSubjectsFilterInput]
+  or: [ModelSubjectsFilterInput]
+  not: ModelSubjectsFilterInput
+}
+
+type Query {
+  getSubjects(id: ID!): Subjects @aws_api_key @aws_iam
+  listSubjects(filter: ModelSubjectsFilterInput, limit: Int, nextToken: String): ModelSubjectsConnection @aws_api_key @aws_iam
+  syncSubjects(filter: ModelSubjectsFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelSubjectsConnection @aws_api_key @aws_iam
+  getUniversities(id: ID!): Universities @aws_api_key @aws_iam
+  listUniversities(filter: ModelUniversitiesFilterInput, limit: Int, nextToken: String): ModelUniversitiesConnection @aws_api_key @aws_iam
+  syncUniversities(filter: ModelUniversitiesFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelUniversitiesConnection @aws_api_key @aws_iam
+  getGenders(id: ID!): Genders @aws_api_key @aws_iam
+  listGenders(filter: ModelGendersFilterInput, limit: Int, nextToken: String): ModelGendersConnection @aws_api_key @aws_iam
+  syncGenders(filter: ModelGendersFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelGendersConnection @aws_api_key @aws_iam
+  getRegistered(id: ID!): Registered @aws_api_key @aws_iam
+  listRegistereds(filter: ModelRegisteredFilterInput, limit: Int, nextToken: String): ModelRegisteredConnection @aws_api_key @aws_iam
+  syncRegistereds(filter: ModelRegisteredFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelRegisteredConnection @aws_api_key @aws_iam
+}
+
+input ModelSubjectsConditionInput {
+  subject_name: ModelStringInput
+  and: [ModelSubjectsConditionInput]
+  or: [ModelSubjectsConditionInput]
+  not: ModelSubjectsConditionInput
+}
+
+input CreateSubjectsInput {
+  id: ID
+  subject_name: String
+  _version: Int
+}
+
+input UpdateSubjectsInput {
+  id: ID!
+  subject_name: String
+  _version: Int
+}
+
+input DeleteSubjectsInput {
+  id: ID!
+  _version: Int
+}
+
+type Mutation {
+  createSubjects(input: CreateSubjectsInput!, condition: ModelSubjectsConditionInput): Subjects @aws_api_key @aws_iam
+  updateSubjects(input: UpdateSubjectsInput!, condition: ModelSubjectsConditionInput): Subjects @aws_api_key @aws_iam
+  deleteSubjects(input: DeleteSubjectsInput!, condition: ModelSubjectsConditionInput): Subjects @aws_api_key @aws_iam
+  createUniversities(input: CreateUniversitiesInput!, condition: ModelUniversitiesConditionInput): Universities @aws_api_key @aws_iam
+  updateUniversities(input: UpdateUniversitiesInput!, condition: ModelUniversitiesConditionInput): Universities @aws_api_key @aws_iam
+  deleteUniversities(input: DeleteUniversitiesInput!, condition: ModelUniversitiesConditionInput): Universities @aws_api_key @aws_iam
+  createGenders(input: CreateGendersInput!, condition: ModelGendersConditionInput): Genders @aws_api_key @aws_iam
+  updateGenders(input: UpdateGendersInput!, condition: ModelGendersConditionInput): Genders @aws_api_key @aws_iam
+  deleteGenders(input: DeleteGendersInput!, condition: ModelGendersConditionInput): Genders @aws_api_key @aws_iam
+  createRegistered(input: CreateRegisteredInput!, condition: ModelRegisteredConditionInput): Registered @aws_api_key @aws_iam
+  updateRegistered(input: UpdateRegisteredInput!, condition: ModelRegisteredConditionInput): Registered @aws_api_key @aws_iam
+  deleteRegistered(input: DeleteRegisteredInput!, condition: ModelRegisteredConditionInput): Registered @aws_api_key @aws_iam
+}
+
+input ModelSubscriptionSubjectsFilterInput {
+  id: ModelSubscriptionIDInput
+  subject_name: ModelSubscriptionStringInput
+  and: [ModelSubscriptionSubjectsFilterInput]
+  or: [ModelSubscriptionSubjectsFilterInput]
+}
+
+type Subscription {
+  onCreateSubjects(filter: ModelSubscriptionSubjectsFilterInput): Subjects @aws_subscribe(mutations: ["createSubjects"]) @aws_api_key @aws_iam
+  onUpdateSubjects(filter: ModelSubscriptionSubjectsFilterInput): Subjects @aws_subscribe(mutations: ["updateSubjects"]) @aws_api_key @aws_iam
+  onDeleteSubjects(filter: ModelSubscriptionSubjectsFilterInput): Subjects @aws_subscribe(mutations: ["deleteSubjects"]) @aws_api_key @aws_iam
+  onCreateUniversities(filter: ModelSubscriptionUniversitiesFilterInput): Universities @aws_subscribe(mutations: ["createUniversities"]) @aws_api_key @aws_iam
+  onUpdateUniversities(filter: ModelSubscriptionUniversitiesFilterInput): Universities @aws_subscribe(mutations: ["updateUniversities"]) @aws_api_key @aws_iam
+  onDeleteUniversities(filter: ModelSubscriptionUniversitiesFilterInput): Universities @aws_subscribe(mutations: ["deleteUniversities"]) @aws_api_key @aws_iam
+  onCreateGenders(filter: ModelSubscriptionGendersFilterInput): Genders @aws_subscribe(mutations: ["createGenders"]) @aws_api_key @aws_iam
+  onUpdateGenders(filter: ModelSubscriptionGendersFilterInput): Genders @aws_subscribe(mutations: ["updateGenders"]) @aws_api_key @aws_iam
+  onDeleteGenders(filter: ModelSubscriptionGendersFilterInput): Genders @aws_subscribe(mutations: ["deleteGenders"]) @aws_api_key @aws_iam
+  onCreateRegistered(filter: ModelSubscriptionRegisteredFilterInput): Registered @aws_subscribe(mutations: ["createRegistered"]) @aws_api_key @aws_iam
+  onUpdateRegistered(filter: ModelSubscriptionRegisteredFilterInput): Registered @aws_subscribe(mutations: ["updateRegistered"]) @aws_api_key @aws_iam
+  onDeleteRegistered(filter: ModelSubscriptionRegisteredFilterInput): Registered @aws_subscribe(mutations: ["deleteRegistered"]) @aws_api_key @aws_iam
+}
+
+type ModelUniversitiesConnection @aws_api_key @aws_iam {
+  items: [Universities]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelUniversitiesFilterInput {
+  id: ModelIDInput
+  university_name: ModelStringInput
+  and: [ModelUniversitiesFilterInput]
+  or: [ModelUniversitiesFilterInput]
+  not: ModelUniversitiesFilterInput
+}
+
+input ModelUniversitiesConditionInput {
+  university_name: ModelStringInput
+  and: [ModelUniversitiesConditionInput]
+  or: [ModelUniversitiesConditionInput]
+  not: ModelUniversitiesConditionInput
+}
+
+input CreateUniversitiesInput {
+  id: ID
+  university_name: String
+  _version: Int
+}
+
+input UpdateUniversitiesInput {
+  id: ID!
+  university_name: String
+  _version: Int
+}
+
+input DeleteUniversitiesInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionUniversitiesFilterInput {
+  id: ModelSubscriptionIDInput
+  university_name: ModelSubscriptionStringInput
+  and: [ModelSubscriptionUniversitiesFilterInput]
+  or: [ModelSubscriptionUniversitiesFilterInput]
+}
+
+type ModelGendersConnection @aws_api_key @aws_iam {
+  items: [Genders]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelGendersFilterInput {
+  id: ModelIDInput
+  gender: ModelStringInput
+  and: [ModelGendersFilterInput]
+  or: [ModelGendersFilterInput]
+  not: ModelGendersFilterInput
+}
+
+input ModelGendersConditionInput {
+  gender: ModelStringInput
+  and: [ModelGendersConditionInput]
+  or: [ModelGendersConditionInput]
+  not: ModelGendersConditionInput
+}
+
+input CreateGendersInput {
+  id: ID
+  gender: String
+  _version: Int
+}
+
+input UpdateGendersInput {
+  id: ID!
+  gender: String
+  _version: Int
+}
+
+input DeleteGendersInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionGendersFilterInput {
+  id: ModelSubscriptionIDInput
+  gender: ModelSubscriptionStringInput
+  and: [ModelSubscriptionGendersFilterInput]
+  or: [ModelSubscriptionGendersFilterInput]
+}
+
+type ModelRegisteredConnection @aws_api_key @aws_iam {
+  items: [Registered]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelRegisteredFilterInput {
+  id: ModelIDInput
+  first_name: ModelStringInput
+  last_name: ModelStringInput
+  gender: ModelIntInput
+  email: ModelStringInput
+  phone: ModelStringInput
+  university: ModelIntInput
+  subject: ModelIntInput
+  participated_before: ModelBooleanInput
+  group: ModelIntInput
+  participatingNow: ModelBooleanInput
+  and: [ModelRegisteredFilterInput]
+  or: [ModelRegisteredFilterInput]
+  not: ModelRegisteredFilterInput
+}
+
+input ModelRegisteredConditionInput {
+  first_name: ModelStringInput
+  last_name: ModelStringInput
+  gender: ModelIntInput
+  email: ModelStringInput
+  phone: ModelStringInput
+  university: ModelIntInput
+  subject: ModelIntInput
+  participated_before: ModelBooleanInput
+  group: ModelIntInput
+  participatingNow: ModelBooleanInput
+  and: [ModelRegisteredConditionInput]
+  or: [ModelRegisteredConditionInput]
+  not: ModelRegisteredConditionInput
+}
+
+input CreateRegisteredInput {
+  id: ID
+  first_name: String
+  last_name: String
+  gender: Int
+  email: AWSEmail
+  phone: String
+  university: Int
+  subject: Int
+  participated_before: Boolean
+  group: Int
+  participatingNow: Boolean
+  _version: Int
+}
+
+input UpdateRegisteredInput {
+  id: ID!
+  first_name: String
+  last_name: String
+  gender: Int
+  email: AWSEmail
+  phone: String
+  university: Int
+  subject: Int
+  participated_before: Boolean
+  group: Int
+  participatingNow: Boolean
+  _version: Int
+}
+
+input DeleteRegisteredInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionRegisteredFilterInput {
+  id: ModelSubscriptionIDInput
+  first_name: ModelSubscriptionStringInput
+  last_name: ModelSubscriptionStringInput
+  gender: ModelSubscriptionIntInput
+  email: ModelSubscriptionStringInput
+  phone: ModelSubscriptionStringInput
+  university: ModelSubscriptionIntInput
+  subject: ModelSubscriptionIntInput
+  participated_before: ModelSubscriptionBooleanInput
+  group: ModelSubscriptionIntInput
+  participatingNow: ModelSubscriptionBooleanInput
+  and: [ModelSubscriptionRegisteredFilterInput]
+  or: [ModelSubscriptionRegisteredFilterInput]
+}
+

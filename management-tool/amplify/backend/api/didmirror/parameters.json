@@ -1,0 +1,6 @@
+{
+  "AppSyncApiName": "didmirror",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-11-24T07:12:07.701Z"
+}

@@ -1,0 +1,29 @@
+type Subjects @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  subject_name: String
+}
+
+type Universities @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  university_name: String
+}
+
+type Genders @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  gender: String
+}
+
+type Registered @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  first_name: String
+  last_name: String
+  gender: Int
+  email: AWSEmail
+  phone: String
+  university: Int
+  subject: Int
+  participated_before: Boolean
+  group: Int
+  participatingNow: Boolean
+}
+ 
