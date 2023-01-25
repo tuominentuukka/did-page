@@ -6,7 +6,3 @@
 ![4](https://user-images.githubusercontent.com/77830209/211607855-3ee42306-96c8-47c8-9ef8-ab8ef844cce8.PNG)
 ![5](https://user-images.githubusercontent.com/77830209/211607858-e25a24d5-c7a7-404b-bc51-2c7fe52f2d2b.PNG)
 
-
-## Author
-
-© [Tuukka Tuominen](https://github.com/tuominentuukka)
