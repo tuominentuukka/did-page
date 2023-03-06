@@ -15,6 +15,8 @@ import CertificatePage from "./pages/CertificatePage";
 import ProfilePage from "./pages/ProfilePage";
 import ResetPasswordPage from "./pages/ForgotPasswordPage";
 
+//https://main.d26fuh9dycag36.amplifyapp.com
+
 function App() {
   document.title = "Digital Impact Day";
   return (
